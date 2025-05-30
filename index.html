@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prof Jawad - Professeur de Mathématiques</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #000000;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .website {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+
+        main {
+            padding: 4rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            color: #333;
+            margin-bottom: 4rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            color: #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: #000;
+        }
+
+        .service-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .exam-levels {
+            background: #f8f9fa;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .exam-levels h2 {
+            text-align: center;
+            color: #000;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .exam-card {
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exam-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.05), transparent);
+            transition: left 0.5s;
+        }
+
+        .exam-card:hover::before {
+            left: 100%;
+        }
+
+        .exam-card:hover {
+            transform: scale(1.05);
+            background: #f8f9fa;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #000;
+        }
+
+        .exam-card h3 {
+            color: #000;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .exam-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .hidden-page {
+            display: none;
+            background: #ffffff;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 3rem;
+            margin-top: 2rem;
+            color: #333;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .hidden-page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .resource-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-color: #000;
+        }
+
+        .resource-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+
+        .resource-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .resource-link {
+            display: inline-block;
+            background: #000000;
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .resource-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            background: #333;
+        }
+
+        .back-btn {
+            background: #000000;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: #000000;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .services {
+                grid-template-columns: 1fr;
+            }
+            
+            .exam-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Prof Jawad</div>
+                <div class="website">www.profjawad.ma</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="homepage">
+            <section class="hero">
+                <h1>Prof de Maths au Collège & Lycée</h1>
+                <p>Préparation aux examens normalisés (Local, Régional, National) & concours</p>
+                <p>📚 Méthodes efficaces pour réussir</p>
+            </section>
+
+            <section class="services">
+                <div class="service-card">
+                    <div class="icon">🎯</div>
+                    <h3>Préparation Ciblée</h3>
+                    <p>Méthodes adaptées à chaque niveau d'examen</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">📈</div>
+                    <h3>Résultats Garantis</h3>
+                    <p>Approche éprouvée pour maximiser vos chances</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon">🏆</div>
+                    <h3>Excellence</h3>
+                    <p>Formation complète aux concours et examens</p>
+                </div>
+            </section>
+
+            <section class="exam-levels">
+                <h2>Niveaux d'Examens</h2>
+                <div class="exam-grid">
+                    <div class="exam-card" onclick="showPage('local3ac')">
+                        <h3>Local 3AC</h3>
+                        <p>Examen local - Troisième année collège</p>
+                    </div>
+                    <div class="exam-card" onclick="showPage('regional3ac')">
+                        <h3>Régional 3AC</h3>
+                        <p>Examen régional - Troisième année collège</p>
+                    </div>
+                    <div class="exam-card" onclick="showPage('regional1bac')">
+                        <h3>Régional 1BAC</h3>
+                        <p>Examen régional - Première année baccalauréat</p>
+                    </div>
+                    <div class="exam-card" onclick="showPage('national2bac')">
+                        <h3>National 2BAC</h3>
+                        <p>Examen national - Deuxième année baccalauréat</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Hidden Pages -->
+        <div id="local3ac" class="hidden-page">
+            <button class="back-btn" onclick="showHomepage()">← Retour</button>
+            <h2>Examen Local 3AC - Ressources</h2>
+            <p>Préparez-vous efficacement pour l'examen local de troisième année collège avec nos ressources spécialisées.</p>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="icon">📄</div>
+                    <h4>Documents PDF</h4>
+                    <p>Cours complets, exercices corrigés et annales</p>
+                    <a href="#" class="resource-link" onclick="alert('Lien vers les PDFs Local 3AC')">Télécharger PDFs</a>
+                </div>
+                <div class="resource-card">
+                    <div class="icon">🎥</div>
+                    <h4>Vidéos YouTube</h4>
+                    <p>Solutions détaillées et explications pas à pas</p>
+                    <a href="#" class="resource-link" onclick="alert('Lien vers les vidéos YouTube Local 3AC')">Voir les Vidéos</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="regional3ac" class="hidden-page">
+            <button class="back-btn" onclick="showHomepage()">← Retour</button>
+            <h2>Examen Régional 3AC - Ressources</h2>
+            <p>Maîtrisez l'examen régional de troisième année collège avec nos méthodes éprouvées.</p>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="icon">📄</div>
+                    <h4>Documents PDF</h4>
+                    <p>Sujets types, corrections détaillées et fiches méthodes</p>
+                    <a href="https://drive.google.com/drive/folders/1QT1jHVjxzegu390vKALJi6rIu0s9pRpX?usp=drive_link" class="resource-link" onclick="alert('Lien vers les PDFs Régional 3AC')">Télécharger PDFs</a>
+                </div>
+                <div class="resource-card">
+                    <div class="icon">🎥</div>
+                    <h4>Vidéos YouTube</h4>
+                    <p>Résolutions complètes et astuces d'examen</p>
+                    <a href="#" class="resource-link" onclick="alert('Lien vers les vidéos YouTube Régional 3AC')">Voir les Vidéos</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="regional1bac" class="hidden-page">
+            <button class="back-btn" onclick="showHomepage()">← Retour</button>
+            <h2>Examen Régional 1BAC - Ressources</h2>
+            <p>Excellez à l'examen régional de première année baccalauréat grâce à notre préparation intensive.</p>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="icon">📄</div>
+                    <h4>Documents PDF</h4>
+                    <p>Programme complet, exercices avancés et stratégies</p>
+                    <a href="#" class="resource-link" onclick="alert('Lien vers les PDFs Régional 1BAC')">Télécharger PDFs</a>
+                </div>
+                <div class="resource-card">
+                    <div class="icon">🎥</div>
+                    <h4>Vidéos YouTube</h4>
+                    <p>Cours magistraux et résolutions expertes</p>
+                    <a href="#" class="resource-link" onclick="alert('Lien vers les vidéos YouTube Régional 1BAC')">Voir les Vidéos</a>
+                </div>
+            </div>
+        </div>
+
+        <div id="national2bac" class="hidden-page">
+            <button class="back-btn" onclick="showHomepage()">← Retour</button>
+            <h2>Examen National 2BAC - Ressources</h2>
+            <p>Réussissez l'examen national du baccalauréat avec notre formation d'excellence.</p>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="icon">📄</div>
+                    <h4>Documents PDF</h4>
+                    <p>Annales officielles, méthodes expertes et simulations</p>
+                    <a href="#" class="resource-link" onclick="alert('Lien vers les PDFs National 2BAC')">Télécharger PDFs</a>
+                </div>
+                <div class="resource-card">
+                    <div class="icon">🎥</div>
+                    <h4>Vidéos YouTube</h4>
+                    <p>Préparation intensive et secrets de réussite</p>
+                    <a href="#" class="resource-link" onclick="alert('Lien vers les vidéos YouTube National 2BAC')">Voir les Vidéos</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Prof Jawad - Tous droits réservés | www.profjawad.ma</p>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            // Hide homepage
+            document.getElementById('homepage').style.display = 'none';
+            
+            // Hide all hidden pages
+            const hiddenPages = document.querySelectorAll('.hidden-page');
+            hiddenPages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function showHomepage() {
+            // Hide all hidden pages
+            const hiddenPages = document.querySelectorAll('.hidden-page');
+            hiddenPages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show homepage
+            document.getElementById('homepage').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Add smooth animations on scroll
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.service-card, .exam-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight * 0.8) {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize cards with fade-in effect
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.service-card, .exam-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                card.style.transitionDelay = `${index * 0.1}s`;
+            });
+            
+            // Trigger animation
+            setTimeout(() => {
+                cards.forEach(card => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
